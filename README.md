@@ -1,4 +1,3 @@
-Part-6: create index after region with data
 step 0: build special version of geode
 git clone git@github.com:gesterzhou/geode.git
 cd geode
