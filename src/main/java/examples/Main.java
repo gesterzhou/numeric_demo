@@ -109,16 +109,18 @@ public class Main {
 
   private void demoNumericQuery() throws InterruptedException, LuceneQueryException, IOException {
     createCache(serverPort);
-    PersonRegion = createRegion(RegionShortcut.PARTITION_REDUNDANT_PERSISTENT, "Person");
-    CustomerRegion = createRegion(RegionShortcut.PARTITION_REDUNDANT_PERSISTENT, "Customer");
+
+    PersonRegion = cache.getRegion("Person");
+    CustomerRegion  = cache.getRegion("Customer");
+//    createPersonIndex();
+//    PersonRegion = createRegion(RegionShortcut.PARTITION_REDUNDANT_PERSISTENT, "Person");
+
+//    createCustomerIndex();
+//    CustomerRegion = createRegion(RegionShortcut.PARTITION_REDUNDANT_PERSISTENT, "Customer");
     feed(ENTRY_COUNT);
-
-    createPersonIndex();
     insertAJson(PersonRegion);
-    waitUntilFlushed("personIndex", "Person");
 
-    createCustomerIndex();
-    insertNestObjects(CustomerRegion);
+    waitUntilFlushed("personIndex", "Person");
     waitUntilFlushed("customerIndex", "Customer");
 
     System.out.println("Press any key to do numeric query in java");
